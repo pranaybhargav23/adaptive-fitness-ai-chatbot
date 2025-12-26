@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
+    borderRadius: 50,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },

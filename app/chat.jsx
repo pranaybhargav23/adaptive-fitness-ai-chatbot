@@ -14,10 +14,10 @@ import Header from "../components/Header";
 import InputBar from "../components/InputBar";
 import QuickSuggestions from "../components/QuickSuggestions";
 
+import { StatusBar } from "expo-status-bar";
 import LottieView from "lottie-react-native";
 import { sendChatMessage } from "../services/api";
 import { useChatStore } from "../store/useChatStore";
-import { StatusBar } from "expo-status-bar";
 
 const ChatScreen = () => {
   const flatListRef = useRef(null);
@@ -98,14 +98,10 @@ const ChatScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar hidden />
+      <StatusBar style="dark" backgroundColor="#fff" />
       <Header />
       
-      <KeyboardAvoidingView
-        style={styles.keyboardView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
-      >
+      <View style={styles.contentContainer}>
         {messages.length === 0 && !loading && (
           <QuickSuggestions onSelect={handleSend} />
         )}
@@ -120,6 +116,12 @@ const ChatScreen = () => {
           onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
           onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
         />
+      </View>
+      
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
+      >
         <InputBar onSend={handleSend} />
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -133,10 +135,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F3F4F6",
   },
-  keyboardView: {
+  contentContainer: {
     flex: 1,
   },
   list: {
+    flexGrow: 1,
     padding: 12,
   },
   messageContainer: {

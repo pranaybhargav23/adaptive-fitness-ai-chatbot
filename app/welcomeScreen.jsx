@@ -1,4 +1,5 @@
 import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -7,7 +8,9 @@ const WelcomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="light" backgroundColor="#000" />
       <View style={styles.container}>
+        
         <Text style={styles.emoji}>🤖</Text>
         <Text style={styles.title}>Your Adaptive Fitness Companion</Text>
         
@@ -38,7 +41,7 @@ export default WelcomeScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+   
   },
   container: {
     flex: 1,
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 32,
-    backgroundColor: "#F9FAFB",
+    backgroundColor: "#FFF7ED",
   },
   title: {
     fontSize: 28,
