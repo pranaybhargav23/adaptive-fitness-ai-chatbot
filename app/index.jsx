@@ -1,4 +1,5 @@
 import { useRouter } from "expo-router";
+import LottieView from "lottie-react-native";
 import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -8,14 +9,19 @@ const SplashScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.replace("/welcomeScreen");
-    }, 2000); // after 2 second it will navigate to Welcome Screen
+    }, 20000); // after 2 second it will navigate to Welcome Screen
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>🤖</Text>
+      <LottieView 
+        source={require("../assets/animations/Chat.json")}
+        autoPlay
+        loop
+        style={styles.logo}
+      />
       <Text style={styles.title}>FitBuddy AI</Text>
       <Text style={styles.subtitle}>Your Adaptive Fitness Companion</Text>
     </View>
@@ -45,4 +51,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#000",
   },
+  logo:{
+    width: 150,
+    height: 150
+  }
 });
