@@ -9,7 +9,7 @@ const SplashScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.replace("/welcomeScreen");
-    }, 20000); // after 2 second it will navigate to Welcome Screen
+    }, 2000); // after 2 second it will navigate to Welcome Screen
 
     return () => clearTimeout(timer);
   }, []);
@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#0000",
+    color: "#1F2937",
   },
   subtitle: {
     marginTop: 8,
     fontSize: 16,
-    color: "#000",
+    color: "#1F2937",
   },
   logo:{
     width: 150,

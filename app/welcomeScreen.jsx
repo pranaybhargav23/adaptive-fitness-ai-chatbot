@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#111827",
+    color: "#1F2937",
     textAlign: "center",
    marginVertical:20,
     lineHeight: 34,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   button: {
-    backgroundColor: "#FF8C00",
+    backgroundColor: "#FF8A00",
     paddingHorizontal: 32,
     paddingVertical: 16,
     borderRadius: 12,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   buttonPressed: {
-    backgroundColor: "#FF8C00",
+    backgroundColor: "#FF8A00",
   },
   buttonText: {
     color: "#FFFFFF",

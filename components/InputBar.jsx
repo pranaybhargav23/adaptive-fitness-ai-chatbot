@@ -1,11 +1,11 @@
-import {
-  View,
-  TextInput,
-  Pressable,
-  Text,
-  StyleSheet,
-} from "react-native";
 import { useState } from "react";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 const InputBar = ({ onSend }) => {
   const [text, setText] = useState("");
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 10,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFF7ED",
   },
   input: {
     flex: 1,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   sendText: {
-    color: "#2563EB",
+    color: "#FF8A00",
     fontWeight: "600",
   },
 });

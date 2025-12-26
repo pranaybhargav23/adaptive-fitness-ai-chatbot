@@ -1,22 +1,23 @@
+import { useEffect, useRef } from "react";
 import {
   Alert,
   FlatList,
+  Image,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
   View,
-  Image,
 } from "react-native";
-import { useRef, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ChatBubble from "../components/ChatBubble";
+import Header from "../components/Header";
 import InputBar from "../components/InputBar";
 import QuickSuggestions from "../components/QuickSuggestions";
 
+import LottieView from "lottie-react-native";
 import { sendChatMessage } from "../services/api";
 import { useChatStore } from "../store/useChatStore";
-import LottieView from "lottie-react-native";
+import { StatusBar } from "expo-status-bar";
 
 const ChatScreen = () => {
   const flatListRef = useRef(null);
@@ -97,6 +98,9 @@ const ChatScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden />
+      <Header />
+      
       <KeyboardAvoidingView
         style={styles.keyboardView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
