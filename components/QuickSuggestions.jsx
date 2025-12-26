@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 
 const SUGGESTIONS = [
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
     helpText: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
     marginBottom: 8,
     },
@@ -45,9 +45,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     marginBottom: 8,
+    alignSelf: 'flex-start',
   },
   text: {
     color: "#1E3A8A",
     fontSize: 14,
+    maxWidth: 'auto',
+    paddingHorizontal: 8,
   },
 });

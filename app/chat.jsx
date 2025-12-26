@@ -1,19 +1,26 @@
 import {
-  ActivityIndicator,
   Alert,
   FlatList,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet
+  StyleSheet,
+  Text,
+  View,
+  Image,
 } from "react-native";
+import { useRef, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ChatBubble from "../components/ChatBubble";
 import InputBar from "../components/InputBar";
 import QuickSuggestions from "../components/QuickSuggestions";
+
 import { sendChatMessage } from "../services/api";
 import { useChatStore } from "../store/useChatStore";
+import LottieView from "lottie-react-native";
 
 const ChatScreen = () => {
+  const flatListRef = useRef(null);
+  
   const {
     messages,
     addMessage,
@@ -23,6 +30,15 @@ const ChatScreen = () => {
     usageDays,
     lifestyle,
   } = useChatStore();
+
+  // Auto-scroll when messages change
+  useEffect(() => {
+    if (flatListRef.current && messages.length > 0) {
+      setTimeout(() => {
+        flatListRef.current.scrollToEnd({ animated: true });
+      }, 100);
+    }
+  }, [messages, loading]);
 
   const handleSend = async (text) => {
     if (!text) return;
@@ -46,22 +62,60 @@ const ChatScreen = () => {
     }
   };
 
+  // Create data array that includes typing indicator when loading
+  const chatData = loading
+    ? [...messages, { role: "typing", text: "" }]
+    : messages;
+
+  const renderChatItem = ({ item }) => {
+    if (item.role === "typing") {
+      return (
+        <View style={styles.messageContainer}>
+          <Image
+            source={{
+              uri: "https://cdn-icons-png.flaticon.com/512/4712/4712027.png",
+            }}
+            style={styles.avatar}
+          />
+          <View style={styles.bubble}>
+            <LottieView
+              source={require("../assets/animations/Typing.json")}
+              autoPlay
+              loop
+              style={{
+                width: 80,
+                height: 50,
+                transform: [{ scale: 1.9 }],
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+    return <ChatBubble message={item} />;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
       >
-        {messages.length === 0 && <QuickSuggestions onSelect={handleSend} />}
+        {messages.length === 0 && !loading && (
+          <QuickSuggestions onSelect={handleSend} />
+        )}
         <FlatList
-          data={messages}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => <ChatBubble message={item} />}
+          ref={flatListRef}
+          data={chatData}
+          keyExtractor={(item, index) =>
+            item.role === "typing" ? "typing" : index.toString()
+          }
+          renderItem={renderChatItem}
           contentContainerStyle={styles.list}
-          
+          onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
+          onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
         />
-        {loading && <ActivityIndicator style={{ marginBottom: 8 }} />}
         <InputBar onSend={handleSend} />
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -80,5 +134,22 @@ const styles = StyleSheet.create({
   },
   list: {
     padding: 12,
+  },
+  messageContainer: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    marginVertical: 4,
+    marginHorizontal: 8,
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 8,
+  },
+  bubble: {
+    backgroundColor: "#F7E8D3",
+    borderRadius: 16,
+    maxWidth: "75%",
   },
 });
