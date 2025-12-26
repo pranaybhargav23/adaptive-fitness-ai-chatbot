@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import Chat from '../models/Chat.js';
 import { buildPrompt } from '../utils/promptBuilder.js';
-import {isUnsafe} from '../utils/safetyCheck.js';
+import { isUnsafe } from '../utils/safetyCheck.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -44,7 +44,7 @@ export const chatWithAI = async (req, res) => {
             lifestyle
         });
 
-        res.json({reply: aiText});
+        return res.json({reply: aiText});
 
     } catch (error) {
         return res.status(500).json({error: 'An error occurred while processing your request.'});
