@@ -20,6 +20,7 @@ export const chatWithAI = async (req, res) => {
                 reply:"I can’t help with medical or injury-related questions. Please consult a certified doctor or professional."
             });
         }
+        
 
         const prompt = buildPrompt({
             personality,
