@@ -1,20 +1,24 @@
 import { create } from 'zustand';
 
 
-export const useChatStore = create((set) => ({
-    personality:"A",
-    usageDays:2,
-    lifestyle:{
-        steps:4200,
-        excerciseMinutes:25,
-        sleepHours:5.5
+export const useChatStore = create((set, get) => ({
+    personality: "A",
+    usageDays: 2,
+    lifestyle: {
+        steps: 4200,
+        excerciseMinutes: 25,
+        sleepHours: 5.5
     },
-    messages:[],
-    loading:false,
-    
+    messages: [],
+
+    loading: false,
+
 
     addMessage: (msg) => set((state) => ({ messages: [...state.messages, msg] })),
-    setLoading: (loading) => set(() => ({ loading }))
-   
+    setLoading: (loading) => set(() => ({ loading })),
+
+
+
+
 
 }));

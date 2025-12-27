@@ -1,7 +1,13 @@
 import { useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,useWindowDimensions } from "react-native";
+import {
+  responsiveWidth,
+  responsiveHeight,
+  responsiveFont,
+} from "../utlis/responsive.js";
+
 
 const SplashScreen = () => {
   const router = useRouter();
@@ -42,17 +48,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   title: {
-    fontSize: 28,
+      fontSize: responsiveFont(2.8),
     fontWeight: "bold",
     color: "#1F2937",
   },
   subtitle: {
     marginTop: 8,
-    fontSize: 16,
+    fontSize: responsiveFont(1.6),
     color: "#1F2937",
   },
   logo:{
-    width: 150,
-    height: 150
+    width: responsiveWidth(60),
+    height: responsiveHeight(25),
   }
 });

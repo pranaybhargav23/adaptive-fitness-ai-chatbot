@@ -2,6 +2,11 @@ import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  responsiveWidth,
+  responsiveHeight,
+  responsiveFont,
+} from "../utlis/responsive.js";
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -41,61 +46,64 @@ export default WelcomeScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-   
   },
+
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingVertical: 32,
+    paddingHorizontal: responsiveWidth(6),
+    paddingVertical: responsiveHeight(4),
     backgroundColor: "#FFF7ED",
   },
+
+  emoji: {
+    fontSize: responsiveFont(3.5), // 🤖 icon
+    marginBottom: responsiveHeight(1.5),
+  },
+
   title: {
-    fontSize: 28,
+    fontSize: responsiveFont(2.8),
     fontWeight: "800",
     color: "#1F2937",
     textAlign: "center",
-   marginVertical:20,
-    lineHeight: 34,
+    marginVertical: responsiveHeight(2.5),
+    lineHeight: responsiveFont(3.4),
   },
-  emoji: {
-    fontSize: 30,
-    marginBottom: 10,
-  },
+
   text: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: responsiveFont(1.8),
+    lineHeight: responsiveFont(2.6),
     color: "#4B5563",
     textAlign: "center",
-    marginBottom: 20,
-    marginHorizontal: 16,
+    marginBottom: responsiveHeight(2.5),
+    marginHorizontal: responsiveWidth(4),
   },
+
   warning: {
-    fontSize: 14,
+    fontSize: responsiveFont(1.6),
     color: "#EF4444",
     textAlign: "center",
-    marginBottom: 32,
+    marginBottom: responsiveHeight(4),
     fontStyle: "italic",
-    marginHorizontal: 16,
+    marginHorizontal: responsiveWidth(4),
   },
+
   button: {
     backgroundColor: "#FF8A00",
-    paddingHorizontal: 32,
-    paddingVertical: 16,
-    borderRadius: 12,
+    paddingHorizontal: responsiveWidth(8),
+    paddingVertical: responsiveHeight(2.2),
+    borderRadius: responsiveWidth(3),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
   },
-  buttonPressed: {
-    backgroundColor: "#FF8A00",
-  },
+
   buttonText: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: responsiveFont(2),
     fontWeight: "700",
     textAlign: "center",
   },

@@ -18,10 +18,11 @@ import { StatusBar } from "expo-status-bar";
 import LottieView from "lottie-react-native";
 import { sendChatMessage } from "../services/api";
 import { useChatStore } from "../store/useChatStore";
+import { responsiveHeight, responsiveWidth } from "../utlis/responsive.js";
 
 const ChatScreen = () => {
   const flatListRef = useRef(null);
-  
+
   const {
     messages,
     addMessage,
@@ -63,7 +64,7 @@ const ChatScreen = () => {
     }
   };
 
-  // Create data array that includes typing indicator when loading
+  // Created data array that includes typing indicator when loading
   const chatData = loading
     ? [...messages, { role: "typing", text: "" }]
     : messages;
@@ -100,7 +101,7 @@ const ChatScreen = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" backgroundColor="#fff" />
       <Header />
-      
+
       <View style={styles.contentContainer}>
         {messages.length === 0 && !loading && (
           <QuickSuggestions onSelect={handleSend} />
@@ -113,11 +114,13 @@ const ChatScreen = () => {
           }
           renderItem={renderChatItem}
           contentContainerStyle={styles.list}
-          onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
+          onContentSizeChange={() =>
+            flatListRef.current?.scrollToEnd({ animated: true })
+          }
           onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
         />
       </View>
-      
+
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
@@ -135,28 +138,35 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F3F4F6",
   },
+
   contentContainer: {
     flex: 1,
   },
+
   list: {
     flexGrow: 1,
-    padding: 12,
+    padding: responsiveWidth(3),
   },
+
   messageContainer: {
     flexDirection: "row",
     alignItems: "flex-end",
-    marginVertical: 4,
-    marginHorizontal: 8,
+    marginVertical: responsiveHeight(0.6),
+    marginHorizontal: responsiveWidth(2),
   },
+
   avatar: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    marginRight: 8,
+    width: responsiveWidth(8),
+    height: responsiveWidth(8),
+    borderRadius: responsiveWidth(4),
+    marginRight: responsiveWidth(2),
   },
+
   bubble: {
     backgroundColor: "#F7E8D3",
-    borderRadius: 16,
+    borderRadius: responsiveWidth(4),
     maxWidth: "75%",
+    paddingVertical: responsiveHeight(1),
+    paddingHorizontal: responsiveWidth(3),
   },
 });

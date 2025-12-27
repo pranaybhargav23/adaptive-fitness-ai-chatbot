@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import { responsiveWidth, responsiveHeight, responsiveFont } from "../utlis/responsive.js";
 
 export default function ChatBubble({ message }) {
   const isUser = message.role === "user";
@@ -39,49 +40,59 @@ export default function ChatBubble({ message }) {
 
 const styles = StyleSheet.create({
   messageContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    marginVertical: 4,
-    marginHorizontal: 8,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    marginVertical: responsiveHeight(0.6),
+    marginHorizontal: responsiveWidth(2),
   },
+
   userMessageContainer: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
+
   botMessageContainer: {
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
   },
+
   avatar: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    marginHorizontal: 8,
+    width: responsiveWidth(8),
+    height: responsiveWidth(8),
+    borderRadius: responsiveWidth(4),
+    marginHorizontal: responsiveWidth(2),
   },
+
   bubble: {
     maxWidth: "70%",
-    padding: 12,
-    borderRadius: 18,
+    paddingVertical: responsiveHeight(1.2),
+    paddingHorizontal: responsiveWidth(3),
+    borderRadius: responsiveWidth(4.5),
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.12,
     shadowRadius: 2,
-    elevation: 2
+    elevation: 2,
   },
+
   userBubble: {
     backgroundColor: "#FF8C00",
-    borderBottomRightRadius: 4
+    borderBottomRightRadius: responsiveWidth(1),
   },
+
   botBubble: {
     backgroundColor: "#F7E8D3",
-    borderBottomLeftRadius: 4
+    borderBottomLeftRadius: responsiveWidth(1),
   },
+
   text: {
-    fontSize: 16,
-    lineHeight: 20
+    fontSize: responsiveFont(1.8),
+    lineHeight: responsiveFont(2.4),
   },
+
   userText: {
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
+
   botText: {
-    color: "#000000"
-  }
+    color: "#000000",
+  },
 });

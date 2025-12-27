@@ -6,6 +6,11 @@ import {
   TextInput,
   View,
 } from "react-native";
+import {
+  responsiveWidth,
+  responsiveHeight,
+  responsiveFont,
+} from "../utlis/responsive.js";
 
 const InputBar = ({ onSend }) => {
   const [text, setText] = useState("");
@@ -36,34 +41,48 @@ export default InputBar;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    paddingHorizontal: 12,
-    paddingVertical: 12,
+    alignItems: "center",
+
+    paddingHorizontal: responsiveWidth(3),
+    paddingVertical: responsiveHeight(1.5),
+
     backgroundColor: "#FFF7ED",
-   borderRadius: 50,
     borderTopWidth: 1,
     borderTopColor: "#E5E7EB",
+
+  
+    width: "100%",
   },
+
   input: {
     flex: 1,
     borderWidth: 1,
     borderColor: "#D1D5DB",
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    borderRadius: responsiveWidth(5),
+
+    paddingHorizontal: responsiveWidth(4),
+    paddingVertical: responsiveHeight(1.2),
+
     backgroundColor: "#FFFFFF",
-    fontSize: 16,
+    fontSize: responsiveFont(1.8),
   },
+
   sendButton: {
-    marginLeft: 12,
+    marginLeft: responsiveWidth(3),
     justifyContent: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    alignItems: "center",
+
+    paddingHorizontal: responsiveWidth(4),
+    paddingVertical: responsiveHeight(1.2),
+
     backgroundColor: "#FF8A00",
-    borderRadius: 20,
+    borderRadius: responsiveWidth(5),
   },
+
   sendText: {
     color: "#FFFFFF",
     fontWeight: "600",
-    fontSize: 16,
+    fontSize: responsiveFont(1.8),
   },
 });
+
