@@ -126,36 +126,37 @@ const ChatScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" backgroundColor="#fff" />
-      <Header onClearChat={handleClearChat} />
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+    >
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="dark" backgroundColor="#fff" />
+        <Header onClearChat={handleClearChat} />
 
-      <View style={styles.contentContainer}>
-        {messages.length === 0 && !loading && (
-          <QuickSuggestions onSelect={handleSend} />
-        )}
-        <FlatList
-          ref={flatListRef}
-          data={chatData}
-          keyExtractor={(item, index) =>
-            item.role === "typing" ? "typing" : index.toString()
-          }
-          renderItem={renderChatItem}
-          contentContainerStyle={styles.list}
-          onContentSizeChange={() =>
-            flatListRef.current?.scrollToEnd({ animated: true })
-          }
-          onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
-        />
-      </View>
+        <View style={styles.contentContainer}>
+          {messages.length === 0 && !loading && (
+            <QuickSuggestions onSelect={handleSend} />
+          )}
+          <FlatList
+            ref={flatListRef}
+            data={chatData}
+            keyExtractor={(item, index) =>
+              item.role === "typing" ? "typing" : index.toString()
+            }
+            renderItem={renderChatItem}
+            contentContainerStyle={styles.list}
+            onContentSizeChange={() =>
+              flatListRef.current?.scrollToEnd({ animated: true })
+            }
+            onLayout={() => flatListRef.current?.scrollToEnd({ animated: true })}
+          />
+        </View>
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
-      >
         <InputBar onSend={handleSend} />
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
