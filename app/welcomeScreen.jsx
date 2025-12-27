@@ -17,7 +17,7 @@ const WelcomeScreen = () => {
       <View style={styles.container}>
         
         <Text style={styles.emoji}>🤖</Text>
-        <Text style={styles.title}>Your Adaptive Fitness Companion</Text>
+        <Text style={styles.title}>FitBuddy AI</Text>
         
 
         <Text style={styles.text}>
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
   },
 
   emoji: {
-    fontSize: responsiveFont(3.5), // 🤖 icon
-    marginBottom: responsiveHeight(1.5),
+    fontSize: responsiveFont(3.5), 
+    marginBottom: responsiveHeight(1),
   },
 
   title: {

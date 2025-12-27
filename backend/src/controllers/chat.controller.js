@@ -22,12 +22,12 @@ export const chatWithAI = async (req, res) => {
             });
         }
 
-        
+
         const lastChat = await Chat.findOne().sort({ createdAt: -1 });
         const currentCoinCount = lastChat ? lastChat.coinCount : 0;
         const newCoinCount = currentCoinCount + 1;
-        
-       
+
+
         const prompt = buildPrompt({
             personality,
             usageDays,
@@ -79,8 +79,8 @@ export const getChatHistory = async (req, res) => {
 export const getCurrentCoinCount = async (req, res) => {
     try {
         const lastChat = await Chat.findOne().sort({ createdAt: -1 });
-     
-        
+
+
         return res.json({ coinCount: lastChat.coinCount });
 
     } catch (error) {
