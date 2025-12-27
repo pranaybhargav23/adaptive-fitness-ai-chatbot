@@ -1,6 +1,6 @@
 export const sendChatMessage = async (payload) => {
     try {
-        const response = await fetch("http://10.0.2.2:3000/api/chat", {
+        const response = await fetch("https://adaptive-fitness-ai-chatbot-1.onrender.com/api/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

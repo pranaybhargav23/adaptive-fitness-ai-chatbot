@@ -22,7 +22,7 @@ export const useChatStore = create((set, get) => ({
     fetchChatHistory: async () => {
         try {
             set({ loading: true });
-            const response = await fetch("http://10.0.2.2:3000/api/chat/history");
+            const response = await fetch("https://adaptive-fitness-ai-chatbot-1.onrender.com/api/chat/history");
             const data = await response.json();
 
             set({ history: data.history });
@@ -36,7 +36,7 @@ export const useChatStore = create((set, get) => ({
 
     fetchCurrentCoinCount: async () => {
         try {
-            const response = await fetch("http://10.0.2.2:3000/api/chat/coins");
+            const response = await fetch("https://adaptive-fitness-ai-chatbot-1.onrender.com/api/chat/coins");
             const data = await response.json();
             console.log("Fetched coin count:", data);
             set({ rewardCoins: data.coinCount });
