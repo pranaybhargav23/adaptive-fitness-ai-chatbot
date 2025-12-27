@@ -3,7 +3,9 @@ export function buildPrompt({
   usageDays,
   lifestyle,
   question
-}) {
+})
+
+{
   return `
 You are an AI-powered fitness companion chatbot.
 You are NOT a medical professional and must NOT provide medical advice.

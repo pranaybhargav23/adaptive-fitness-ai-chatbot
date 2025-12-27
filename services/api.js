@@ -8,7 +8,7 @@ export const sendChatMessage = async (payload) => {
             body: JSON.stringify(payload)
         });
 
-        
+
 
         return await response.json();
 
@@ -16,5 +16,5 @@ export const sendChatMessage = async (payload) => {
     } catch (error) {
         console.error("Error sending chat message:", error);
     }
-   
+
 }

@@ -31,6 +31,9 @@ const ChatScreen = () => {
     personality,
     usageDays,
     lifestyle,
+    fetchChatHistory,
+    clearMessages,
+    fetchCurrentCoinCount
   } = useChatStore();
 
   // Auto-scroll when messages change
@@ -41,6 +44,31 @@ const ChatScreen = () => {
       }, 100);
     }
   }, [messages, loading]);
+
+   useEffect(() => {
+    fetchChatHistory();
+    fetchCurrentCoinCount()
+   }, []);
+
+   const handleClearChat = () => {
+     Alert.alert(
+       "Clear Chat",
+       "Are you sure you want to clear all messages?",
+       [
+         {
+           text: "Cancel",
+           style: "cancel",
+         },
+         {
+           text: "Clear",
+           style: "destructive",
+           onPress: () => {
+             clearMessages();
+           },
+         },
+       ]
+     );
+   };
 
   const handleSend = async (text) => {
     if (!text) return;
@@ -85,8 +113,8 @@ const ChatScreen = () => {
               autoPlay
               loop
               style={{
-                width: 80,
-                height: 50,
+                width: 70,
+                height: 40,
                 transform: [{ scale: 1.9 }],
               }}
             />
@@ -100,7 +128,7 @@ const ChatScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" backgroundColor="#fff" />
-      <Header />
+      <Header onClearChat={handleClearChat} />
 
       <View style={styles.contentContainer}>
         {messages.length === 0 && !loading && (

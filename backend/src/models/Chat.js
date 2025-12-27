@@ -6,6 +6,7 @@ const chatSchema = new mongoose.Schema({
     personality:String,
     usageDays:Number,
     lifeStyle:Object,
+    coinCount:{ type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now  }
 });
 

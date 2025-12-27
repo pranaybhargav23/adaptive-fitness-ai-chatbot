@@ -2,28 +2,30 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useChatStore } from "../store/useChatStore.js";
 import {
   responsiveFont,
   responsiveHeight,
   responsiveWidth,
 } from "../utlis/responsive.js";
 
-const Header = ({ title = "AIBOT", onSettingsPress }) => {
+const Header = ({ title = "AIBOT", onSettingsPress, onClearChat }) => {
   const router = useRouter();
-  const [showDropdown, setShowDropdown] = useState(false);
+
+  const { rewardCoins } = useChatStore();
+  const [showModal, setShowModal] = useState(false);
 
   const handleMenuPress = () => {
-    setShowDropdown(!showDropdown);
+    setShowModal(!showModal);
   };
 
   const handleMenuItemPress = (action) => {
-    setShowDropdown(false);
-    if (action === "coins") {
-      // Handle coins action
-      console.log("Coins clicked");
-    } else if (action === "history") {
+    setShowModal(false);
+    if (action === "history") {
       router.push("/history");
+    } else if (action === "clear" && onClearChat) {
+      onClearChat();
     }
   };
 
@@ -49,27 +51,48 @@ const Header = ({ title = "AIBOT", onSettingsPress }) => {
         </TouchableOpacity>
       </LinearGradient>
 
-      {showDropdown && (
-        <View style={styles.dropdown}>
-          <TouchableOpacity
-            style={styles.dropdownItem}
-            onPress={() => handleMenuItemPress("coins")}
-          >
-            <Text style={styles.coinEmoji}>🪙</Text>
-            <Text style={styles.dropdownText}>Coins</Text>
-          </TouchableOpacity>
+      <Modal
+        visible={showModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowModal(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setShowModal(false)}
+        >
+          <View style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.modalItem}
+              onPress={() => handleMenuItemPress("coins")}
+            >
+              <Text style={styles.coinEmoji}>🪙</Text>
+              <Text style={styles.modalText}>Coins : {rewardCoins}</Text>
+            </TouchableOpacity>
 
-          <View style={styles.separator} />
+            <View style={styles.separator} />
 
-          <TouchableOpacity
-            style={styles.dropdownItem}
-            onPress={() => handleMenuItemPress("history")}
-          >
-            <Ionicons name="time-outline" size={18} color="#1F2937" />
-            <Text style={styles.dropdownText}>History</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+            <TouchableOpacity
+              style={styles.modalItem}
+              onPress={() => handleMenuItemPress("history")}
+            >
+              <Ionicons name="time-outline" size={18} color="#1F2937" />
+              <Text style={styles.modalText}>History</Text>
+            </TouchableOpacity>
+
+            <View style={styles.separator} />
+
+            <TouchableOpacity
+              style={styles.modalItem}
+              onPress={() => handleMenuItemPress("clear")}
+            >
+              <Ionicons name="trash-outline" size={18} color="#1F2937" />
+              <Text style={styles.modalText}>Clear Chat</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
@@ -115,34 +138,40 @@ const styles = StyleSheet.create({
     color: "#374151",
   },
 
-  dropdown: {
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+  },
+
+  modalContent: {
     position: "absolute",
     top: responsiveHeight(6.5),
     right: responsiveWidth(4),
     backgroundColor: "#FFFFFF",
-    borderRadius: responsiveWidth(2),
+    borderRadius: responsiveWidth(3),
+    paddingVertical: responsiveHeight(2),
+    paddingHorizontal: responsiveWidth(4),
+    minWidth: responsiveWidth(45),
+    elevation: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    minWidth: responsiveWidth(35),
-    paddingVertical: responsiveHeight(1),
-    zIndex: 1000,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
 
-  dropdownItem: {
+  modalItem: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: responsiveWidth(4),
     paddingVertical: responsiveHeight(1.5),
+    paddingHorizontal: responsiveWidth(3),
   },
 
-  dropdownText: {
-    fontSize: responsiveFont(1.8),
+  modalText: {
+    fontSize: responsiveFont(1.6),
     color: "#1F2937",
     marginLeft: responsiveWidth(3),
     fontWeight: "500",
+    flex: 1,
   },
 
   separator: {
