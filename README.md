@@ -8,15 +8,18 @@ It helps users with workouts, fitness habits, and consistency using adaptive, be
 ## 🚀 Tech Stack
 
 **Frontend**
+
 - React Native (Expo – Managed Workflow)
 - JavaScript (JS + JSX)
 - Zustand (State Management)
 
 **Backend**
+
 - Node.js (v20.x) + Express
 - MongoDB (Chat storage)
 
 **AI**
+
 - OpenAI Chat Completion API
 
 ## ✨ Core Features
@@ -35,6 +38,7 @@ It helps users with workouts, fitness habits, and consistency using adaptive, be
 FitBuddy AI adapts responses using three layers of context:
 
 **1️⃣ Personality Types**
+
 - **A – Encouragement Seeker**: empathetic, reassuring
 - **B – Creative Explorer**: creative, non-rigid
 - **C – Goal Finisher**: structured, action-oriented
@@ -42,11 +46,13 @@ FitBuddy AI adapts responses using three layers of context:
 (Personality is hardcoded for demo.)
 
 **2️⃣ Usage Duration Logic**
+
 - **0–3 days**: empathetic, gentle
 - **4–8 days**: friendly guidance
 - **9+ days**: coach-like, actionable
 
 **3️⃣ Lifestyle Context (Dummy Data)**
+
 ```json
 {
   "steps": 4200,
@@ -60,6 +66,7 @@ The AI explicitly references this data in responses.
 ## 🧩 Prompt Composition Strategy
 
 Every OpenAI request combines:
+
 - User personality
 - Usage duration
 - Lifestyle signals
@@ -70,6 +77,7 @@ This logic is implemented in `backend/utils/promptBuilder.js`.
 ## 🛡️ Safety & Scope Handling
 
 FitBuddy AI politely refuses questions related to:
+
 - Diseases
 - Injuries
 - Medications or supplements
@@ -77,6 +85,7 @@ FitBuddy AI politely refuses questions related to:
 It clearly states it cannot provide medical advice and suggests consulting a certified professional.
 
 Safety is handled using:
+
 - Keyword checks (`safetyCheck.js`)
 - System-level AI instructions
 
@@ -93,6 +102,7 @@ Users can reopen past chats from the History screen.
 ## ▶️ How to Run the Project
 
 **Backend**
+
 ```bash
 cd backend
 npm install
@@ -102,17 +112,20 @@ npm start      # For production
 ```
 
 Create a `.env` file:
+
 ```
 OPENAI_API_KEY=your_openai_key
 MONGO_URI=your_mongodb_uri
 PORT=3000
 ```
 
-**Deployed Backend:** 
+**Deployed Backend:**
+
 - Production API: `https://adaptive-fitness-ai-chatbot-1.onrender.com`
 - The app is configured to use the deployed backend by default
 
 **Frontend**
+
 ```bash
 npm install
 npx expo start
@@ -123,19 +136,9 @@ npx expo start
 **📱 Android APK Download:**
 [Download FitBuddy AI APK](https://expo.dev/accounts/pranaybhargav/projects/fitness-chatbot-starter/builds/b462732e-1683-4aba-8e15-90be64dc4353)
 
-**Demo showcases:**
-- Welcome screen with FitBuddy AI branding
-- Real-time chat interaction with adaptive responses
-- Personality-based behavior differences
-- Usage-duration coaching evolution
-- Structured AI replies with bullet points and plans
-- Safety refusal handling for medical topics
-- Coin reward system in action
-
 ## 🤖 AI Tools Used
 
 - **OpenAI Chat Completion API** (primary AI engine for user-facing chat functionality)
-
 
 ## 📂 Project Architecture
 
@@ -166,18 +169,21 @@ npx expo start
 ## 🔧 Key Implementation Details
 
 **State Management (Zustand):**
+
 - Personality: Hardcoded as "A" (Encouragement Seeker) for demo
 - Usage Days: Set to 2 days for consistent demo behavior
 - Lifestyle Data: Mock data (4200 steps, 25 exercise minutes, 5.5 sleep hours)
 - Coin System: Persistent across sessions via backend
 
 **AI Integration:**
+
 - OpenAI GPT model with structured system prompts
 - Dynamic context injection based on user profile
 - Safety layer prevents medical advice responses
 - Structured response formatting enforced via prompts
 
 **Backend Features:**
+
 - RESTful API with Express.js
 - MongoDB for chat history and coin persistence
 - CORS enabled for cross-origin requests
