@@ -134,10 +134,8 @@ npx expo start
 
 ## 🤖 AI Tools Used
 
-- **OpenAI Chat Completion API** (primary AI engine)
-- **ChatGPT** (development assistance for prompts & architecture)
+- **OpenAI Chat Completion API** (primary AI engine for user-facing chat functionality)
 
-All core logic (prompt composition, safety, behavior rules) was implemented manually.
 
 ## 📂 Project Architecture
 
