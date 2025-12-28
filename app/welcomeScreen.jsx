@@ -13,7 +13,7 @@ const WelcomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar style="light" backgroundColor="#000" />
+      <StatusBar style="dark" backgroundColor="#fff" />
       <View style={styles.container}>
         
         <Text style={styles.emoji}>🤖</Text>
