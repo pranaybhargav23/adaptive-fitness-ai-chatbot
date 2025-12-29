@@ -7,9 +7,9 @@ import {
   View,
 } from "react-native";
 import {
-  responsiveWidth,
-  responsiveHeight,
   responsiveFont,
+  responsiveHeight,
+  responsiveWidth,
 } from "../utlis/responsive.js";
 
 const InputBar = ({ onSend }) => {
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     paddingHorizontal: responsiveWidth(3),
-    paddingVertical: responsiveHeight(1.5),
+    paddingTop: responsiveHeight(1.5),
+    paddingBottom: 0,
 
     backgroundColor: "#FFF7ED",
     borderTopWidth: 1,

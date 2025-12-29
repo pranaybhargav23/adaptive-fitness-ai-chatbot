@@ -131,7 +131,8 @@ const ChatScreen = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
     >
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.safeAreaTop} edges={['top']}>
+        <View style={styles.container}>
         <StatusBar style="dark" backgroundColor="#fff" />
         <Header onClearChat={handleClearChat} />
 
@@ -155,6 +156,7 @@ const ChatScreen = () => {
         </View>
 
         <InputBar onSend={handleSend} />
+        </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -164,6 +166,11 @@ export default ChatScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: "#F3F4F6",
+  },
+
+  safeAreaTop: {
     flex: 1,
     backgroundColor: "#F3F4F6",
   },
