@@ -6,6 +6,7 @@ const Layout = () => {
       <Stack.Screen name="index" />
       <Stack.Screen name="welcomeScreen" />
       <Stack.Screen name="chat" />
+      <Stack.Screen name="history" />
     </Stack>
   );
 };
